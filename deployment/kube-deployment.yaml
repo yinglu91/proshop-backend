@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proshop-backend-deployment
+  namespace: dev-01
+spec:
+  selector:
+    matchLabels:
+      app: proshop-backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: proshop-backend
+    spec:
+      containers:
+        - name: proshop-backend
+          image: yinglu91/proshop-backend:1.0
+          ports:
+            - containerPort: 5000
+
+          env:
+            - name: MONGO_URI
+              valueFrom:
+                secretKeyRef:
+                  name: proshop-backend-keys
+                  key: mongo_url
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: proshop-backend-keys
+                  key: jwt_secret
+            - name: PAYPAL_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: proshop-backend-keys
+                  key: paypal_client_id
