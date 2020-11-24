@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: proshop-backend-demo
+  name: proshop-backend
   namespace: dev-01
 spec:
   containers:
-    - name: proshop-backend-demo
+    - name: proshop-backend
       image: yinglu91/proshop-backend:1.0
       resources:
         limits:
